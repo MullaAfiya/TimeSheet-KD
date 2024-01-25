@@ -1,0 +1,7 @@
+Login credentials with Password
+
+User Username :- demouser Password :- 1234567
+
+Admin Username :-demoadmin Password :-1234567
+
+SuperAdmin Username :-SuperAdmin Password :-1234567
