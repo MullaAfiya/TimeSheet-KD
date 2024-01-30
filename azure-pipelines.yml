@@ -22,15 +22,24 @@ steps:
     restoreSolution: '$(solution)'
 
 
+##- task: SendEmail@1
+#  inputs:
+#    To: 'spkute1919@gmail.com'
+ #   From: 'afiya.mulla@cloverinfotech.com'
+  #  Subject: 'Build Success'
+   # Body: 'Hurray build success'
+    #BodyAsHtml: false
+    #AddAttachment: false
+   # SmtpServer: 'email.cloverinfotech.com'
+   # SmtpUsername: 'afiya.mulla@cloverinfotech.com'
+   # SmtpPassword: 'Zimbra@123'
+   # UseSSL: false
+
 - task: SendEmail@1
+  displayName: 'Send Email Notification'
   inputs:
-    To: 'spkute1919@gmail.com'
+    To: 'your.email@example.com'
     From: 'afiya.mulla@cloverinfotech.com'
-    Subject: 'Build Success'
-    Body: 'Hurray build success'
-    BodyAsHtml: false
-    AddAttachment: false
-    SmtpServer: 'email.cloverinfotech.com'
-    SmtpUsername: 'afiya.mulla@cloverinfotech.com'
-    SmtpPassword: 'Zimbra@123'
-    UseSSL: false
+    Subject: 'Build Notification'
+    Body: 'The build has been completed successfully.'
+  
