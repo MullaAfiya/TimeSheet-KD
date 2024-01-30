@@ -14,34 +14,34 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
-steps:
-- task: NuGetToolInstaller@1
+stages:
+- stage: Build
+  displayName: 'Build Stage'
+  jobs:
+  - job: BuildJob
+    displayName: 'Build Job'
+    steps:
+    - task: NuGetToolInstaller@1
 
- 
+- stage: Approval
+  displayName: 'Approval Stage'
+  jobs:
+  - job: ApprovalJob
+    displayName: 'Approval Job'
+    steps:
+    - task: ManualIntervention@8
+      inputs:
+        instructions: 'Please review the build and approve or reject.'
+        emailRecipients: 'afiya.mulla@cloverinfotech.com'
 
-##- task: SendEmail@1
-#  inputs:
-#    To: 'spkute1919@gmail.com'
- #   From: 'afiya.mulla@cloverinfotech.com'
-  #  Subject: 'Build Success'
-   # Body: 'Hurray build success'
-    #BodyAsHtml: false
-    #AddAttachment: false
-   # SmtpServer: 'email.cloverinfotech.com'
-   # SmtpUsername: 'afiya.mulla@cloverinfotech.com'
-   # SmtpPassword: 'Zimbra@123'
-   # UseSSL: false
+# Uncomment and modify the following steps as needed for your pipeline
+# - task: PublishSymbols@2
+#   inputs:
+#     symbolsFolder: '$(Build.SourcesDirectory)\YourSymbolFolder'
+#     searchPattern: '**\bin\$(BuildConfiguration)\**\*.pdb'
 
-- task: SendEmail@1
-  displayName: 'Send Email Notification'
-  inputs:
-    To: 'spkute1919@gmail.com'
-    From: 'mullaafiya@gmail.com'
-    Subject: 'Build Notification'
-    Body: 'The build has been completed successfully.'
-    SmtpServer: 'email.cloverinfotech.com'  # Provide your SMTP server address here
-    SmtpUsername: 'afiya.mulla@cloverinfotech.com'
-    SmtpPassword: 'Zimbra@123'
-    SmtpPort: '587'
-    
-    UseSSL: false
+# - task: CopyFiles@2
+#   inputs:
+#     SourceFolder: '$(Build.SourcesDirectory)\YourArtifactFolder'
+#     Contents: '**'
+#     TargetFolder: '$(Build.ArtifactStagingDirectory
