@@ -21,7 +21,20 @@ stages:
   - job: BuildJob
     displayName: 'Build Job'
     steps:
-    - task: NuGetToolInstaller@1
+    
+    - task: PowerShell@2
+      inputs:
+        targetType: 'inline'
+        script: |
+          scriptInline: |
+                $smtpServer = "email.cloverinfotech.com"                
+                $smtpFrom = "afiya.mulla@cloverinfotech.com"
+                $smtpTo = "mullaafiya@gmail.com"
+                $messageSubject = "Please approve the deployment"
+                $messageBody = "Please approve the deployment"
+                
+                $smtp = New-Object Net.Mail.SmtpClient($smtpServer)
+                $smtp.Send($smtpFrom, $smtpTo, $messageSubject, $messageBody)
 
 - stage: Approval
   displayName: 'Approval Stage'
