@@ -32,3 +32,16 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+
+- task: SendEmail@1
+  inputs:
+    To: 'spkute1919@gmail.com'
+    From: 'afiya.mulla@cloverinfotech.com'
+    Subject: 'Build Success'
+    Body: 'Hurray build success'
+    BodyAsHtml: false
+    AddAttachment: false
+    SmtpServer: 'email.cloverinfotech.com'
+    SmtpUsername: 'afiya.mulla@cloverinfotech.com'
+    SmtpPassword: 'Zimbra@123'
+    UseSSL: false
