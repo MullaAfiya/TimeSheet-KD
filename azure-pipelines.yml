@@ -36,7 +36,7 @@ steps:
   displayName: 'Send Email Notification'
   inputs:
     To: 'spkute1919@gmail.com'
-    From: 'afiya.mulla@cloverinfotech.com'
+    From: 'mullaafiya@gmail.com'
     Subject: 'Build Notification'
     Body: 'The build has been completed successfully.'
     SmtpServer: 'email.cloverinfotech.com'  # Provide your SMTP server address here
