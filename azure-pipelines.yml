@@ -21,34 +21,55 @@ stages:
   - job: BuildJob
     displayName: 'Build Job'
     steps:
-    
-    - task: PowerShell@2
+    - task: UseDotNet@2
       inputs:
-        targetType: 'inline'
-        script: |
-          scriptInline: |
-                $smtpServer = "email.cloverinfotech.com"    
-                $smtpPort = 587            
-                $smtpFrom = "afiya.mulla@cloverinfotech.com"
-                $smtpTo = "mullaafiya@gmail.com"
-                $messageSubject = "Please approve the deployment"
-                $messageBody = "Please approve the deployment"
-                
-                $smtp = New-Object Net.Mail.SmtpClient($smtpServer)
-                $smtp.Send($smtpFrom, $smtpTo, $messageSubject, $messageBody)
+        packageType: 'sdk'
+        version: '3.x'
+        installationPath: $(Agent.ToolsDirectory)/dotnet
+
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: 'restore'
+        projects: '$(solution)'
+
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: 'build'
+        projects: '$(solution)'
+        arguments: '--configuration $(buildConfiguration)'
+
+    # Add additional build and test steps if needed.
 
 - stage: Approval
   displayName: 'Approval Stage'
   jobs:
   - job: manual_approval
     displayName: "Manual Approval"
-    pool: server
+    pool:
+      name: server
     steps:
-    - task: ManualValidation@0
-      timeoutInMinutes: 5
+    
+    - task: PowerShell@2
       inputs:
-       notifyUsers: 'afiya.mulla@cloverinfotech.com'
-       instructions: "Hi, please validate"
+        targetType: 'inline'
+        script: |
+          $smtpServer = "email.cloverinfotech.com"
+          $smtpPort = 587  # Replace with your actual SMTP port number
+          $smtpFrom = "afiya.mulla@cloverinfotech.com"
+          $smtpTo = "mullaafiya@gmail.com"
+          $messageSubject = "Please approve the deployment"
+          $messageBody = "Please approve the deployment"
+          
+          $mailParams = @{
+              From       = $smtpFrom
+              To         = $smtpTo
+              Subject    = $messageSubject
+              Body       = $messageBody
+              SmtpServer = $smtpServer
+              Port       = $smtpPort  # Specify the correct SMTP port number
+          }
+
+          Send-MailMessage @mailParams
 
     - task: ManualIntervention@8
       inputs:
