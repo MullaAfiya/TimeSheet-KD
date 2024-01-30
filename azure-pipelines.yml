@@ -35,3 +35,8 @@ stages:
       inputs:
        notifyUsers: 'afiya.mulla@cloverinfotech.com'
        instructions: "Hi, please validate"
+
+    - task: ManualIntervention@8
+      inputs:
+        instructions: 'kindly approve'
+        emailRecipients: 'afiya.mulla@cloverinfotech.com'
