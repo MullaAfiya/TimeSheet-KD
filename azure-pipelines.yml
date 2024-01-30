@@ -26,31 +26,12 @@ stages:
 - stage: Approval
   displayName: 'Approval Stage'
   jobs:
-  - job: ApprovalJob
-    displayName: 'Approval Job'
+  - job: manual_approval
+    displayName: "Manual Approval"
+    pool: server
     steps:
-    - task: ManualIntervention@8
+    - task: ManualValidation@0
+      timeoutInMinutes: 5
       inputs:
-        instructions: 'xyz'
-        emailRecipients: 'afiya.mulla@cloverinfotech.com'
-# Uncomment and modify the following steps as needed for your pipeline
-# - task: PublishSymbols@2
-#   inputs:
-#     symbolsFolder: '$(Build.SourcesDirectory)\YourSymbolFolder'
-#     searchPattern: '**\bin\$(BuildConfiguration)\**\*.pdb'
-
-# - task: CopyFiles@2
-#   inputs:
-#     SourceFolder: '$(Build.SourcesDirectory)\YourArtifactFolder'
-#     Contents: '**'
-#     TargetFolder: '$(Build.ArtifactStagingDirectory)'
-
-# - task: PublishBuildArtifacts@1
-#   inputs:
-#     pathtoPublish: '$(Build.ArtifactStagingDirectory)'
-#     artifactName: 'drop'
-#     publishLocation: 'Container'
-
-# - task: DeployTaskHere
-
-# - task: Send
+       notifyUsers: 'afiya.mulla@cloverinfotech.com'
+       instructions: "Hi, please validate"
