@@ -81,7 +81,3 @@ stages:
 
           Send-MailMessage @mailParams
 
-    - task: ManualIntervention@8
-      inputs:
-        instructions: 'kindly approve'
-        emailRecipients: 'afiya.mulla@cloverinfotech.com'
