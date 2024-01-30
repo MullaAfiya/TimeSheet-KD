@@ -48,7 +48,12 @@ stages:
     pool:
       name: server
     steps:
-    
+    - task: ManualValidation@0
+      timeoutInMinutes: 5
+      inputs:
+        notifyUsers: 'afiya.mulla@cloverinfotech.com'
+        instructions: "Hi, please validate"
+
     - task: PowerShell@2
       inputs:
         targetType: 'inline'
