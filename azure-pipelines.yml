@@ -27,7 +27,8 @@ stages:
         targetType: 'inline'
         script: |
           scriptInline: |
-                $smtpServer = "email.cloverinfotech.com"                
+                $smtpServer = "email.cloverinfotech.com"    
+                $smtpPort = 587            
                 $smtpFrom = "afiya.mulla@cloverinfotech.com"
                 $smtpTo = "mullaafiya@gmail.com"
                 $messageSubject = "Please approve the deployment"
