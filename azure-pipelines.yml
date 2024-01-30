@@ -21,6 +21,17 @@ stages:
   - job: BuildJob
     displayName: 'Build Job'
     steps:
+    - task: UseDotNet@2
+      inputs:
+        packageType: 'sdk'
+        version: '3.x'
+        installationPath: $(Agent.ToolsDirectory)/dotnet
+
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: 'restore'
+        projects: '$(solution)'
+
     - task: DotNetCoreCLI@2
       inputs:
         command: 'build'
@@ -46,7 +57,7 @@ stages:
   - job: SendEmailJob
     displayName: "Send Email"
     pool:
-      name: server
+      name: Default
     steps:
     - task: PowerShell@2
       inputs:
