@@ -39,4 +39,9 @@ steps:
     From: 'afiya.mulla@cloverinfotech.com'
     Subject: 'Build Notification'
     Body: 'The build has been completed successfully.'
-  
+    SmtpServer: 'email.cloverinfotech.com'  # Provide your SMTP server address here
+    SmtpUsername: 'afiya.mulla@cloverinfotech.com'
+    SmtpPassword: 'Zimbra@123'
+    SmtpPort: '587'
+    
+    UseSSL: false
