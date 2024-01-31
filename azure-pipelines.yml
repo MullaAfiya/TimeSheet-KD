@@ -23,6 +23,18 @@ stages:
    
     # Add additional build and test steps if needed.
 
+
+  - job: SendEmailJob
+    displayName: "Send Email"
+    pool:
+      name: Default
+    steps:
+    - task: PowerShell@2
+      displayName: SendEmail
+      inputs:
+        filePath: 'C:\KhalidSir\EmailConfiguration.ps1'
+        
+
 - stage: Approval
   displayName: 'Approval Stage'
   jobs:
@@ -36,15 +48,3 @@ stages:
       inputs:
         notifyUsers: 'afiya.mulla@cloverinfotech.com'
         instructions: "Hi, please validate"
-
-  - job: SendEmailJob
-    displayName: "Send Email"
-    pool:
-      name: Default
-    steps:
-    - task: PowerShell@2
-      displayName: SendEmail
-      inputs:
-        filePath: 'C:\KhalidSir\EmailConfiguration.ps1'
-        
-
