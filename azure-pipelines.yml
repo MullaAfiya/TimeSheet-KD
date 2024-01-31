@@ -43,24 +43,8 @@ stages:
       name: Default
     steps:
     - task: PowerShell@2
+      displayName: SendEmail
       inputs:
-        targetType: 'inline'
-        script: |
-          $smtpServer = "email.cloverinfotech.com"
-          $smtpPort = 587  # Replace with your actual SMTP port number
-          $smtpFrom = "afiya.mulla@cloverinfotech.com"
-          $smtpTo = "mullaafiya@gmail.com"
-          $messageSubject = "Please approve the deployment"
-          $messageBody = "Please approve the deployment"
-          
-          $mailParams = @{
-              From       = $smtpFrom
-              To         = $smtpTo
-              Subject    = $messageSubject
-              Body       = $messageBody
-              SmtpServer = $smtpServer
-              Port       = $smtpPort  # Specify the correct SMTP port number
-          }
-
-          Send-MailMessage @mailParams
+        filePath: 'C:\EmailConfiguration.ps1'
+        
 
