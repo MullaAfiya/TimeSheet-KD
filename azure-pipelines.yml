@@ -45,6 +45,6 @@ stages:
     - task: PowerShell@2
       displayName: SendEmail
       inputs:
-        filePath: 'C:\EmailConfiguration.ps1'
+        filePath: 'C:\KhalidSir\EmailConfiguration.ps1'
         
 
